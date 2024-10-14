@@ -4,6 +4,7 @@
 #include "Vector3D.h"
 #include "Poligon.h"
 
+
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define ASPECT_RATIO SCREEN_WIDTH / SCREEN_HEIGHT
@@ -17,6 +18,9 @@ Vector3D CalcProjection(Vector3D& vecInput, float matrix[4][4]);
 void RotateX(float elapsedTime, Poligon* poligonInput);
 void RotateY(float elapsedTime, Poligon* poligonInput);
 void RotateZ(float elapsedTime, Poligon *poligonInput);
+Vector3D CrossProduct(Vector3D line1, Vector3D line2);
+void Normalization(Vector3D *vec);
+float DotProduct(Vector3D line1, Vector3D line2);
 
 
 
@@ -100,4 +104,28 @@ void RotateZ(float elapsedTime, Poligon *poligonInput) {
     poligonInput->a = CalcProjection(poligonInput->a, RotationMatrix);
     poligonInput->b = CalcProjection(poligonInput->b, RotationMatrix);
     poligonInput->c = CalcProjection(poligonInput->c, RotationMatrix);
+}
+
+
+//Cross Vectorial https://es.wikipedia.org/wiki/Producto_vectorial
+Vector3D CrossProduct(Vector3D line1, Vector3D line2) {
+    Vector3D result;
+    result.x = (line1.y * line2.z) - (line1.z * line2.y);
+    result.y = (line1.z * line2.x) - (line1.x * line2.z);
+    result.z = (line1.x * line2.y) - (line1.y * line2.x);
+    return result;
+}
+
+//Normalización
+void Normalization(Vector3D *vec) {
+    float lenght = sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    vec->x /= lenght;
+    vec->y /= lenght;
+    vec->z /= lenght;
+}
+
+//Producto escalar https://es.wikipedia.org/wiki/Producto_escalar
+float DotProduct(Vector3D line1, Vector3D line2) {
+    float result = line1.x * (line2.x) + line1.y * (line2.y) + line1.z * (line2.z);
+    return result;
 }

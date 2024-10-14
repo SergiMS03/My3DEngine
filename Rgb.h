@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 class Rgb {
 public:
     float r;
@@ -10,4 +11,12 @@ public:
         this->g = g;
         this->b = b;
     }
+
+    void SetIlumination(float intensiti) {
+        float lightIntensity = std::max(0.0f, intensiti);
+        r *= lightIntensity;
+        g *= lightIntensity;
+        b *= lightIntensity;
+    }
+
 };

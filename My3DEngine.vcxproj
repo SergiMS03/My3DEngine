@@ -136,6 +136,7 @@
     <ClCompile Include="My3DEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="GraphMaths.h" />
     <ClInclude Include="Model3D.h" />
     <ClInclude Include="Poligon.h" />

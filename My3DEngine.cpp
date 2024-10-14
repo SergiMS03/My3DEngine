@@ -7,6 +7,7 @@
 #include "Poligon.h"
 #include "Model3D.h"
 #include "Rgb.h"
+#include "Camera.h"
 
 
 
@@ -25,7 +26,7 @@ int main(void)
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     std::cout << glGetString(GL_VENDOR) << std::endl;
     std::cout << glGetString(GL_RENDERER) << std::endl;
@@ -33,7 +34,7 @@ int main(void)
 
     
 
-
+    Camera camera;
     Model3D cube = Model3D::BuildCube();
     InitProyectionMatrix(SCREEN_WIDTH, SCREEN_HEIGHT, Z_NEAR, Z_FAR, FOV);
     auto lastTime = std::chrono::high_resolution_clock::now();
@@ -42,7 +43,7 @@ int main(void)
     {
         auto currentTime = std::chrono::high_resolution_clock::now();
         std::chrono::duration<float> elapsedTime = currentTime - lastTime;
-        cube.Draw(elapsedTime.count(), true, false, true);
+        cube.Draw(elapsedTime.count(), camera, true, true, true);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
